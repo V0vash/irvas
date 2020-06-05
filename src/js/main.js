@@ -1,4 +1,11 @@
 import "./slider";
 import popups from "./modules/popups";
 
-console.log("1");
+document.addEventListener('DOMContentLoaded', () => {
+
+    popups('.popup_engineer_btn', '.popup_engineer');
+    popups('.phone_link', '.popup');
+
+});
+
+
