@@ -1,16 +1,25 @@
-function popups(triggerSelector, popupSelector){
+
+function showPopupByTime(popupSelector, time){
+    const popup = document.querySelector(popupSelector);
+
+    setTimeout(()=>{
+        popup.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    },time);
+}
+
+function popups(triggerSelector, popupSelector, popupCloseSelector){
 const trigger = document.querySelectorAll(triggerSelector),
       popup = document.querySelector(popupSelector),
-      popupClose = document.querySelector(`${popupSelector} .popup_close`);
-      
-      console.log(trigger);
+      popupClose = document.querySelector(`${popupSelector} ${popupCloseSelector}`);
 
 function bindPopup(){
      //open
     trigger.forEach((item) => {
         item.addEventListener('click',(e) => {
-            console.log(e.target);
+            if(e.target) {
             e.preventDefault();
+            }
             popup.style.display = 'block';
             document.body.style.overflow = 'hidden';
         });
@@ -37,3 +46,4 @@ bindPopup();
 }
 
 export default popups;
+export {showPopupByTime};
