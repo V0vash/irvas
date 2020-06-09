@@ -9,7 +9,6 @@ function tabs(tabsHeaderSelector, tabsSelector, tabsContentSelector, activeClass
         });
         tabs.forEach((item) => {
             item.classList.remove(activeClass);
-            console.log(item);
         });
     }
 

@@ -2,8 +2,10 @@ import "./slider";
 import popups from "./modules/popups";
 import {showPopupByTime} from "./modules/popups";
 import tabs from "./modules/tabs";
+import forms from "./modules/forms";
 
 document.addEventListener('DOMContentLoaded', () => { 
+    "use strict";
 
     popups('.popup_engineer_btn', '.popup_engineer', '.popup_close');
     popups('.phone_link', '.popup', '.popup_close');
@@ -12,6 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     tabs('.glazing_slider', '.glazing_block', '.glazing_content', 'active');
     tabs('.decoration_slider', '.no_click', '.decoration_content > div > div', 'after-click');
+
+    forms();
 
 });
 
