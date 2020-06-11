@@ -1,4 +1,6 @@
-function forms (){
+import checkNumInputs from "./checkNumInputs";
+
+function forms (state){
     const forms = document.querySelectorAll('form'),
           inputs = document.querySelectorAll('input'),
           phoneInputs = document.querySelectorAll('input[name="user_phone"]'),
@@ -8,11 +10,7 @@ function forms (){
               failure: 'Что-то пошло не так'
           };
 
-    phoneInputs.forEach(item => {
-        item.addEventListener('input', () => {
-            item.value = item.value.replace(/\D/, '');
-        });
-    });
+    checkNumInputs(phoneInputs);
 
     const postData = async (url, data) =>{
         document.querySelector('.status').textContent = message.loading;
@@ -38,7 +36,12 @@ function forms (){
             statusMassage.classList.add('status');
             item.append(statusMassage);
 
-            const formData = new FormData(item); 
+            const formData = new FormData(item);
+            if(item.getAttribute('data-calc') == 'end'){
+                for(let key in state){
+                    formData.append(key, state[key]);
+                }
+            } 
 
             postData('assets/server.php', formData)
             .then(res => {
