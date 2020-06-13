@@ -13,8 +13,9 @@ function bindPopup(triggerSelector, popupSelector, popupCloseSelector, closeClic
     const trigger = document.querySelectorAll(triggerSelector),
       popup = document.querySelector(popupSelector),
       popupClose = document.querySelector(`${popupSelector} ${popupCloseSelector}`),
-      windows = document.querySelectorAll('[data-popup]');
-      
+      windows = document.querySelectorAll('[data-popup]'),
+      scroll = calcScroll();
+
      //open
     trigger.forEach((item) => {
         item.addEventListener('click',(e) => {
@@ -27,7 +28,7 @@ function bindPopup(triggerSelector, popupSelector, popupCloseSelector, closeClic
             });
 
             popup.style.display = 'block';
-            document.body.style.overflow = 'hidden';
+            document.body.style.marginRight = `${scroll}px`;
         });
     });
 
@@ -40,6 +41,7 @@ function bindPopup(triggerSelector, popupSelector, popupCloseSelector, closeClic
             });
             popup.style.display = 'none';
             document.body.style.overflow = '';
+            document.body.style.marginRight = `0px`;
         }
     });
     //x -close
@@ -49,7 +51,23 @@ function bindPopup(triggerSelector, popupSelector, popupCloseSelector, closeClic
         });
         popup.style.display = 'none';
         document.body.style.overflow = '';
+        document.body.style.marginRight = `0px`;
     });
+}
+
+function calcScroll(){
+    let div = document.createElement('div');
+
+    div.style.width = '50px';
+    div.style.height = '50px';
+    div.style.overflowY = 'scroll';
+    div.style.visibility = 'hidden';
+
+    document.body.appendChild(div);
+    let scrollWidth = div.offsetWidth - div.clientWidth;
+    div.remove();
+
+    return scrollWidth;
 }
 
 bindPopup('.popup_engineer_btn', '.popup_engineer', '.popup_close');
